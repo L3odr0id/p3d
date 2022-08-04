@@ -234,13 +234,11 @@ pub fn get_contour(mesh: &Mesh, z_sect: f64) -> Vec<Point2<f64>> {
 
     for vertex_id in mesh.vertex_iter() {
         let p = mesh.vertex_position(vertex_id);
-        println!("(p.z - z_sect).abs() < 0.15 condition: {}", (p.z - z_sect).abs() < 0.15);
         if (p.z - z_sect).abs() < 0.15 {
             sect.push(Vec2{x: p.x, y: p.y});
         }
     }
 
-    println!("{}", sect.len() == 0);
 
     if sect.len() == 0 {
         return Vec::new();
@@ -275,8 +273,6 @@ pub fn get_contour(mesh: &Mesh, z_sect: f64) -> Vec<Point2<f64>> {
 
     cntr.push(cntr.as_slice()[0]);
 
-    println!("{}", cntr.len());
-
     // println!("contour len: {}", sect.len());
     // println!("contour: {:?}", cntr);
 
@@ -291,7 +287,6 @@ pub fn get_contour(mesh: &Mesh, z_sect: f64) -> Vec<Point2<f64>> {
 
         let p = Point2{x: p0.x + (n as f64)  * d2, y: p0.y + (n as f64) * d2 * k};
         cntr.push(p);
-        println!("{}", cntr.len());
     }
 
     cntr

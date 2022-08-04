@@ -18,8 +18,6 @@ pub extern fn calc(par1: c_short, par2: c_short, path: *const c_char) -> *mut c_
         Err(_e) => "Error".to_string(),
     };
 
-    
-
     // Maybe we should free the [r]. This can be a potential memory leak
     // In the example they call the [free] function 
     // https://github.com/brickpop/flutter-rust-ffi/blob/f7b5d399bab542641b67466c31294b106d57bb9e/rust/src/lib.rs#L16
@@ -31,11 +29,11 @@ pub fn calc_inner(par1: i16, par2: i16, path: String)->Result<String, std::io::E
     let mut input = BufReader::new(f);
     let mut buf = Vec::new();
 
+    // it's okay that result is not used
     input.read_to_end(&mut buf);
 
     let c: &[u8] = &buf;
 
-    println!("{}", buf.len());
     
 
     let res_hashes = p3d_process(c, AlgoType::Grid2d, par1, par2,);
@@ -45,7 +43,7 @@ pub fn calc_inner(par1: i16, par2: i16, path: String)->Result<String, std::io::E
         Err(_e) => vec!["Error".to_string()],
     };
 
-    println!("{}", r.is_empty());
+    // println!("{}", r.is_empty());
 
     let mut res = r.join("\n");
 
