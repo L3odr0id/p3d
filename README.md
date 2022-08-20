@@ -14,31 +14,29 @@
     - Run `make` to see the available actions
     - Run `make init` to install the Rust targets
     - Run `make all` to build the libraries and the `.h` file
-  - Update the name of your library in `Cargo.toml`
-    - You'll need to update the symlinks to target the new file names. See iOS and Android below.
-  Generated artifacts:
-  - Android libraries
-    - `target/aarch64-linux-android/release/libexample.so`
-    - `target/armv7-linux-androideabi/release/libexample.so`
-    - `target/i686-linux-android/release/libexample.so`
-    - `target/x86_64-linux-android/release/libexample.so`
-  - iOS library
-    - `target/universal/release/libexample.a`
-  - Bindings header
-    - `target/bindings.h`
+  - Check generated artifacts:
+    - Android libraries
+        - `target/aarch64-linux-android/release/libexample.so`
+        - `target/armv7-linux-androideabi/release/libexample.so`
+        - `target/i686-linux-android/release/libexample.so`
+        - `target/x86_64-linux-android/release/libexample.so`
+    - iOS library
+        - `target/universal/release/libexample.a`
+    - Bindings header
+        - `target/bindings.h`
 - Place artifacts to the threedpass project. Follow this structure in ```threedpass/packages/calc/android```:
   ```
   src
   └── main
       └── jniLibs
           ├── arm64-v8a
-          │   └── libexample.so -> p3d/target/aarch64-linux-android/release/libexample.so
+          │   └── libexample.so <- p3d/target/aarch64-linux-android/release/libexample.so
           ├── armeabi-v7a
-          │   └── libexample.so@ -> p3d/target/armv7-linux-androideabi/release/libexample.so
+          │   └── libexample.so <- p3d/target/armv7-linux-androideabi/release/libexample.so
           ├── x86
-          │   └── libexample.so@ -> p3d/target/i686-linux-android/release/libexample.so
+          │   └── libexample.so <- p3d/target/i686-linux-android/release/libexample.so
           └── x86_64
-              └── libexample.so@ -> p3d/target/x86_64-linux-android/release/libexample.so
+              └── libexample.so <- p3d/target/x86_64-linux-android/release/libexample.so
   ```
 - Update the ios folder. Place ```p3d/target/aarch64-apple-ios/release/libcalc.a``` into ```threedpass/packages/calc/ios```
 - If you have changed the interface, follow next steps also. Otherwise you can compile the app and check the functionality.
@@ -68,4 +66,4 @@
   - Use bindings and write Dart code you need.
 
 <br></br>
-Thank you for contribution!
+#### Thank you for contribution!

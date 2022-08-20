@@ -10,6 +10,7 @@ use std::ffi::{CString, CStr};
 #[no_mangle]
 pub extern fn calc(par1: c_short, par2: c_short, path: *const c_char) -> *mut c_char 
 {
+    // Some memory leaks are possible ¯\_(ツ)_/¯
     let c_str_path = unsafe { CStr::from_ptr(path) };
     let rust_str_path = c_str_path.to_str().unwrap().to_string();
 
@@ -29,13 +30,10 @@ pub fn calc_inner(par1: i16, par2: i16, path: String)->Result<String, std::io::E
     let mut input = BufReader::new(f);
     let mut buf = Vec::new();
 
-    // it's okay that result is not used
     input.read_to_end(&mut buf);
 
     let c: &[u8] = &buf;
-
     
-
     let res_hashes = p3d_process(c, AlgoType::Grid2d, par1, par2,);
 
     let r = match res_hashes {
@@ -43,13 +41,7 @@ pub fn calc_inner(par1: i16, par2: i16, path: String)->Result<String, std::io::E
         Err(_e) => vec!["Error".to_string()],
     };
 
-    // println!("{}", r.is_empty());
-
-    let mut res = r.join("\n");
-
-    if r.is_empty(){
-        res = "Empty".to_string();
-    }
+    let res = r.join("\n");
 
    return Ok(res);
 }
