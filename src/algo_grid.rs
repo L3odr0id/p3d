@@ -233,15 +233,12 @@ pub fn get_contour(mesh: &Mesh, z_sect: f64) -> Vec<Point2<f64>> {
     // construct plane section
     let mut sect = Vec::<Vec2>::new();
 
-    
-
     for vertex_id in mesh.vertex_iter() {
         let p = mesh.vertex_position(vertex_id);
         if (p.z - z_sect).abs() < 0.15 {
             sect.push(Vec2{x: p.x, y: p.y});
         }
     }
-
 
     if sect.len() == 0 {
         return Vec::new();

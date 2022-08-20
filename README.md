@@ -16,12 +16,12 @@
     - Run `make all` to build the libraries and the `.h` file
   - Check generated artifacts:
     - Android libraries
-        - `target/aarch64-linux-android/release/libexample.so`
-        - `target/armv7-linux-androideabi/release/libexample.so`
-        - `target/i686-linux-android/release/libexample.so`
-        - `target/x86_64-linux-android/release/libexample.so`
+        - `target/aarch64-linux-android/release/libcalc.so`
+        - `target/armv7-linux-androideabi/release/libcalc.so`
+        - `target/i686-linux-android/release/libcalc.so`
+        - `target/x86_64-linux-android/release/libcalc.so`
     - iOS library
-        - `target/universal/release/libexample.a`
+        - `target/universal/release/libcalc.a`
     - Bindings header
         - `target/bindings.h`
 - Place artifacts to the threedpass project. Follow this structure in ```threedpass/packages/calc/android```:
@@ -30,13 +30,13 @@
   └── main
       └── jniLibs
           ├── arm64-v8a
-          │   └── libexample.so <- p3d/target/aarch64-linux-android/release/libexample.so
+          │   └── libcalc.so <- p3d/target/aarch64-linux-android/release/libcalc.so
           ├── armeabi-v7a
-          │   └── libexample.so <- p3d/target/armv7-linux-androideabi/release/libexample.so
+          │   └── libcalc.so <- p3d/target/armv7-linux-androideabi/release/libcalc.so
           ├── x86
-          │   └── libexample.so <- p3d/target/i686-linux-android/release/libexample.so
+          │   └── libcalc.so <- p3d/target/i686-linux-android/release/libcalc.so
           └── x86_64
-              └── libexample.so <- p3d/target/x86_64-linux-android/release/libexample.so
+              └── libcalc.so <- p3d/target/x86_64-linux-android/release/libcalc.so
   ```
 - Update the ios folder. Place ```p3d/target/aarch64-apple-ios/release/libcalc.a``` into ```threedpass/packages/calc/ios```
 - If you have changed the interface, follow next steps also. Otherwise you can compile the app and check the functionality.
