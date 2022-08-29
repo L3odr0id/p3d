@@ -1,4 +1,4 @@
-#![no_std]
+// #![no_std]
 
 use alloc::string::String;
 use alloc::vec::Vec;
@@ -21,6 +21,7 @@ use crate::contour::Rect;
 mod polyline;
 mod contour;
 mod algo_grid;
+mod ffi_interface;
 use algo_grid::find_top_std;
 type Vec2 = Point2<f64>;
 
@@ -33,6 +34,15 @@ pub enum AlgoType {
 
 #[derive(Debug)]
 pub struct P3DError {}
+
+fn main(){
+    let res = ffi_interface::calc_inner(66, 8, "./3dpass-1308.obj".to_string());
+    let r = match res {
+        Ok(h) => println!("{}", h),
+        Err(_e) => println!("error"),
+    };
+    // println!("Hello, world!");
+}
 
 
 #[allow(unused_variables)]
