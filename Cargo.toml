@@ -4,8 +4,15 @@ version = "0.3.0"
 authors = ["mish"]
 edition = "2018"
 
+[toolchain]
+channel = "nightly"
+
 [build]
 target = "wasm32-unknown-unknown"
+
+[lib]
+name = "calc"
+crate-type = ["staticlib", "cdylib"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
