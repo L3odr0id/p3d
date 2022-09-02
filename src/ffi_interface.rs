@@ -3,6 +3,7 @@ use alloc::string::{ToString, String};
 
 use crate::{p3d_process, AlgoType, P3DError};
 use core::ffi::{c_uchar, c_short, c_char, c_int};
+use core::ptr::null;
 
 
 
@@ -86,4 +87,36 @@ unsafe fn make_slice<'a>(ptr: *const u8, len: usize) -> &'a [u8] {
 
     // dereference pointer to slice, so we get a slice
     *slice_ptr
+}
+
+use alloc::alloc::{GlobalAlloc, Layout};
+
+struct MyAllocator;
+
+unsafe impl GlobalAlloc for MyAllocator {
+    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+        let mut str = [];
+        let mut r = str.as_mut_ptr();
+        r
+    }
+
+    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+        // do nothing
+    }
+}
+
+#[global_allocator]
+static GLOBAL: MyAllocator = MyAllocator;
+
+use core::panic::PanicInfo;
+
+/// This function is called on panic.
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
+}
+
+#[alloc_error_handler]
+fn oom(_layout: Layout) -> ! {
+    panic!("Out of memory!");
 }

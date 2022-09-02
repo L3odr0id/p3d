@@ -1,4 +1,5 @@
 #![no_std]
+#![feature(alloc_error_handler)]
 
 use alloc::string::String;
 use alloc::vec::Vec;
