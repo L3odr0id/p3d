@@ -2,13 +2,13 @@ use alloc::ffi::CString;
 use alloc::string::{ToString, String};
 
 use crate::{p3d_process, AlgoType, P3DError};
-use core::ffi::{c_uchar, c_short, c_char, c_uint,};
+use core::ffi::{c_uchar, c_short, c_char, c_int};
 
 
 
 // Interface for the C binding
 #[no_mangle]
-pub extern fn calc( input: *const c_uchar, input_len: c_uint,  par1: c_short, par2: c_short, trans: *const c_uchar) -> *mut c_char 
+pub extern fn calc(input: *const c_uchar, input_len: c_int,  par1: c_short, par2: c_short, trans: *const c_uchar) -> *mut c_char 
 {
     // Some memory leaks are possible 
     // let c_str_path = unsafe { CStr::from_ptr(path) };
@@ -33,7 +33,7 @@ pub extern fn calc( input: *const c_uchar, input_len: c_uint,  par1: c_short, pa
         Err(_e) => "Error".to_string(),
     };
 
-    // Maybe we should free the [r]. This can be a potential memory leak
+    // Maybe we should free the CString. This can be a potential memory leak
     // In the example they call the [free] function 
     // https://github.com/brickpop/flutter-rust-ffi/blob/f7b5d399bab542641b67466c31294b106d57bb9e/rust/src/lib.rs#L16
     return CString::new(r).unwrap().into_raw(); 
